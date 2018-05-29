@@ -2,6 +2,8 @@ package com.yjtm.domian;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Repository;
+@Repository 
 public class Users {
     private Integer id;
 

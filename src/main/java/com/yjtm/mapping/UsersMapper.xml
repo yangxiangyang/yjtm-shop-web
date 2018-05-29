@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yjtm.dao.UsersDao" >
+  <resultMap id="BaseResultMap" type="com.yjtm.domian.Users" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="pic" property="pic" jdbcType="VARCHAR" />
+    <result column="ext" property="ext" jdbcType="VARCHAR" />
+    <result column="forms" property="forms" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="wx_name" property="wxName" jdbcType="VARCHAR" />
+    <result column="opid" property="opid" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="cdate" property="cdate" jdbcType="TIMESTAMP" />
+    <result column="mechanism_id" property="mechanismId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, pic, ext, forms, sex, wx_name, opid, address, cdate, mechanism_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from users
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yjtm.domian.Users" >
+    insert into users (id, pic, ext, 
+      forms, sex, wx_name, 
+      opid, address, cdate, 
+      mechanism_id)
+    values (#{id,jdbcType=INTEGER}, #{pic,jdbcType=VARCHAR}, #{ext,jdbcType=VARCHAR}, 
+      #{forms,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{wxName,jdbcType=VARCHAR}, 
+      #{opid,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{cdate,jdbcType=TIMESTAMP}, 
+      #{mechanismId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yjtm.domian.Users" >
+    insert into users
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="pic != null" >
+        pic,
+      </if>
+      <if test="ext != null" >
+        ext,
+      </if>
+      <if test="forms != null" >
+        forms,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="wxName != null" >
+        wx_name,
+      </if>
+      <if test="opid != null" >
+        opid,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="cdate != null" >
+        cdate,
+      </if>
+      <if test="mechanismId != null" >
+        mechanism_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pic != null" >
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="ext != null" >
+        #{ext,jdbcType=VARCHAR},
+      </if>
+      <if test="forms != null" >
+        #{forms,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="wxName != null" >
+        #{wxName,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null" >
+        #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mechanismId != null" >
+        #{mechanismId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yjtm.domian.Users" >
+    update users
+    <set >
+      <if test="pic != null" >
+        pic = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="ext != null" >
+        ext = #{ext,jdbcType=VARCHAR},
+      </if>
+      <if test="forms != null" >
+        forms = #{forms,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="wxName != null" >
+        wx_name = #{wxName,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        opid = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null" >
+        cdate = #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mechanismId != null" >
+        mechanism_id = #{mechanismId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yjtm.domian.Users" >
+    update users
+    set pic = #{pic,jdbcType=VARCHAR},
+      ext = #{ext,jdbcType=VARCHAR},
+      forms = #{forms,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      wx_name = #{wxName,jdbcType=VARCHAR},
+      opid = #{opid,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      cdate = #{cdate,jdbcType=TIMESTAMP},
+      mechanism_id = #{mechanismId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
