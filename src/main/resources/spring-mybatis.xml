@@ -16,16 +16,16 @@
 	<!-- 1、引入相关properties springProperties/*.properties-->
 	<bean id="mappings"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations" value="classpath:resource/*.properties"></property>
+		<property name="locations" value="classpath:*.properties"></property>
 	</bean>
 
 	<!-- 2、以dbcp连接池方式配置数据源 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/tccp" />
+		<property name="url" value="jdbc:mysql://localhost:3306/dubbo_shop" />
 		<property name="username" value="root" />
-		<property name="password" value="123456" />
+		<property name="password" value="root" />
 		<!-- 连接初始值，连接池启动时创建的连接数量的初始值 默认值是0 -->
 		<property name="initialSize" value="0" />
 		<!-- 最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请 默认值是0 -->
@@ -36,24 +36,24 @@
 		<property name="maxActive" value="15" />
 	</bean>
 
+	<!-- 3、 mybatis的SqlSession的工厂: SqlSessionFactoryBean dataSource:引用数据源，configLocation:配置文件位置 -->
+	<!--<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+			<property name="dataSource" ref="dataSource"></property>
+			<property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
+		</bean>--> 
+
 	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 --> 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
-		<property name="dataSource" ref="dataSource" /> 
+		<property name="dataSource" ref="dataSource" />  
 		<!-- 自动扫描mapping.xml文件 --> 
 		<property name="mapperLocations" value="classpath:mapping/*.xml"></property> 
-	</bean> 
+	</bean>   
     
     
-	<!-- 3、 mybatis的SqlSession的工厂: SqlSessionFactoryBean dataSource:引用数据源，configLocation:配置文件位置 -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"></property>
-		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
-	</bean>
-
 	<!-- 4、 mybatis自动扫描加载Sql映射文件/接口 : MapperScannerConfigurer sqlSessionFactory 
 		basePackage:指定sql映射文件/接口所在的包（自动扫描） sqlSessionFactory:引用SQLSessionFactory -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.tc.tccp.web.dao"></property>
+		<property name="basePackage" value="com.yjtm.dao"></property>
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
 
